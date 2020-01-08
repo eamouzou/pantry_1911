@@ -27,8 +27,15 @@ class Recipe
   end
 
   def recipe_hash
-    ingtototal = {ingredients: [], total_calories: total_calories }
-    (ingredients.first.calories) / (total_calories.to_f) * 100
-    # require "pry"; binding.pry
+    sorted_ingredients = ingredients.sort_by {|ing| (ing.calories / total_calories.to_f) * 100 }
+    ingredients_array = []
+    sorted_ingredients.each do |ingredient|
+      string = " oz" if ingredient.name == "Macaroni" || ingredient.name == "Ground Beef"
+      string = " C" if ingredient.name == "Cheese"
+      string = " g" if ingredient.name == "Bun"
+      ingredients_array << {ingredient: ingredient.name, amount: amount_required(ingredient).to_s + string}
+    end
+
+    full = {ingredients: ingredients_array, total_calories: total_calories }
   end
 end
