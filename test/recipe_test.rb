@@ -60,4 +60,18 @@ class RecipeTest < Minitest::Test
 
     assert_equal expected, @recipe.recipe_hash
   end
+
+  def test_recipe_hash_for_burger
+    @ingredient3 = Ingredient.new("Ground Beef", "oz", 100)
+    @ingredient4 = Ingredient.new("Bun", "g", 1)
+    @recipe2 = Recipe.new("Burger")
+    @recipe2.add_ingredient(@ingredient3, 4)
+    @recipe2.add_ingredient(@ingredient4, 100)
+
+    expected = {:ingredients=>[{:ingredient=>"Ground Beef", :amount=>"4 oz"},
+      {:ingredient=>"Bun", :amount=>"100 g"}], :total_calories=>500}
+
+      assert_equal expected, @recipe2.recipe_hash
+    end
+
 end

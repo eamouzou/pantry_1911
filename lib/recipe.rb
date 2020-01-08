@@ -27,13 +27,15 @@ class Recipe
   end
 
   def recipe_hash
-    sorted_ingredients = ingredients.sort_by {|ing| (ing.calories / total_calories.to_f) * 100 }
+    sorted_ingredients = ingredients_required.sort_by do |ing|
+      (ing[0].calories * ing[1]) / total_calories.to_f
+    end.reverse
     ingredients_array = []
     sorted_ingredients.each do |ingredient|
-      string = " oz" if ingredient.name == "Macaroni" || ingredient.name == "Ground Beef"
-      string = " C" if ingredient.name == "Cheese"
-      string = " g" if ingredient.name == "Bun"
-      ingredients_array << {ingredient: ingredient.name, amount: amount_required(ingredient).to_s + string}
+      string = " oz" if ingredient[0].name == "Macaroni" || ingredient[0].name == "Ground Beef"
+      string = " C" if ingredient[0].name == "Cheese"
+      string = " g" if ingredient[0].name == "Bun"
+      ingredients_array << {ingredient: ingredient[0].name, amount: amount_required(ingredient[0]).to_s + string}
     end
 
     full = {ingredients: ingredients_array, total_calories: total_calories }
