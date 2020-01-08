@@ -25,4 +25,10 @@ class Recipe
       acc
     end
   end
+
+  def recipe_hash
+    ingtototal = {ingredients: [], total_calories: total_calories }
+    (ingredients.first.calories) / (total_calories.to_f) * 100
+    # require "pry"; binding.pry
+  end
 end
