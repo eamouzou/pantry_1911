@@ -15,6 +15,6 @@ class RecipeTest < Minitest::Test
   end
 
   def test_name
-    
+    assert_equal "Mac and Cheese", @recipe.name
   end
 end
