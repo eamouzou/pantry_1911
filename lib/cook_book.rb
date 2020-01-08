@@ -12,12 +12,10 @@ class CookBook
   def summary
     summary = []
     @recipes.each do |recipe|
-      detailshash = {}
-      recipe_hash = {name: recipe.name, details: detailshash}
+      recipe_hash = {name: recipe.name, details: recipe.recipe_hash}
       summary << recipe_hash
     end
-    # require "pry"; binding.pry
-
+    summary
   end
 
 
