@@ -10,5 +10,7 @@ class Recipe
     @ingredients_required[ingredient] = amount
   end
 
-
+  def amount_required(ingredient)
+    (@ingredients_required.find {|ing, amount| ingredient == ing})[1]
+  end
 end
