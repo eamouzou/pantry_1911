@@ -32,7 +32,6 @@ class Pantry
       else
         enough = false
       end
-      # require "pry"; binding.pry
     end
     enough
   end
