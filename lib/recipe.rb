@@ -12,6 +12,7 @@ class Recipe
 
   def amount_required(ingredient)
     (@ingredients_required.find {|ing, amount| ingredient == ing})[1]
+    # could also just be @ingredients_required[ingredient]
   end
 
   def ingredients
@@ -32,10 +33,11 @@ class Recipe
     end.reverse
     ingredients_array = []
     sorted_ingredients.each do |ingredient|
-      string = " oz" if ingredient[0].name == "Macaroni" || ingredient[0].name == "Ground Beef"
-      string = " C" if ingredient[0].name == "Cheese"
-      string = " g" if ingredient[0].name == "Bun"
-      ingredients_array << {ingredient: ingredient[0].name, amount: amount_required(ingredient[0]).to_s + string}
+      # Don't need this because the ingredient object gives us an unit.
+      # string = " oz" if ingredient[0].name == "Macaroni" || ingredient[0].name == "Ground Beef"
+      # string = " C" if ingredient[0].name == "Cheese"
+      # string = " g" if ingredient[0].name == "Bun"
+      ingredients_array << {ingredient: ingredient[0].name, amount: amount_required(ingredient[0]).to_s + " " + ingredient[0].unit}
     end
 
     full = {ingredients: ingredients_array, total_calories: total_calories }
